@@ -152,6 +152,10 @@ func (s *Subscriber) Subscribe(ctx context.Context, url string) (<-chan *message
 	return messages, nil
 }
 
+func (s *Subscriber) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	s.server.Handler.ServeHTTP(w, r)
+}
+
 // StartHTTPServer starts http server.
 // It must be called after all Subscribe calls have completed.
 // Just like http.Server.Serve(), it returns http.ErrServerClosed after the server's been closed.
